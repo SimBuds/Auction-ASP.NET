@@ -1,0 +1,32 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:20071",
+      "sslPort": 44354
+    }
+  },
+  "profiles": {
+    "web_project": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:7082;http://localhost:5185",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "Connection": "https://auctionvault.vault.azure.net/",
+        "AZURE_USERNAME": "Casey-Hsu@outlook.com"
+      }
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production",
+        "Connection": "https://auctionvault.vault.azure.net/",
+        "AZURE_USERNAME": "Casey-Hsu@outlook.com"
+      }
+    }
+  }
+}

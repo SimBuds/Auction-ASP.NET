@@ -1,0 +1,81 @@
+﻿@model web_project.Models.Auction
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2 class="text-info">Create a New Auction</h2>
+
+<div class="row card bg-dark text-info">
+    <div class="card-body align-content-center">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label">Name:</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Description:</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Image:</label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Starting Price:</label>
+                <input asp-for="StartingPrice" class="form-control" />
+                <span asp-validation-for="StartingPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Auction End Date:</label>
+                <input asp-for="EndDate" class="form-control" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Category:</label>
+                <select asp-for="Category" class="form-control">
+                    <option value="">Select a category</option>
+                    <option value="0">Electronics</option>
+                    <option value="1">Fashion</option>
+                    <option value="2">Home</option>
+                    <option value="3">Sports</option>
+                    <option value="4">Books</option>
+                    <option value="5">Other</option>
+                </select>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Condition:</label>
+                <select asp-for="Condition" class="form-control">
+                    <option value="">Select a condition</option>
+                    <option value="0">New</option>
+                    <option value="1">Used</option>
+                </select>
+                <span asp-validation-for="Condition" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Reserve Price:</label>
+                <input asp-for="ReservedPrice" class="form-control" />
+                <span asp-validation-for="ReservedPrice" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="UserId" value="@User.Identity.Name" />
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="text-info">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

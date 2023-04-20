@@ -1,0 +1,71 @@
+﻿@model IEnumerable<web_project.Models.Auction>
+
+@{
+    ViewData["Title"] = "Index";
+}
+  
+<h2 class="text-info my-4">Auctions List</h2>
+<div class="container card-custom p-4">
+    <div class="row"> 
+        <form asp-action="AdvancedSearch" class="form-inline">
+            <input class="form-control bg-dark text-info border-info mr-2" type="search" name="NameSearch" placeholder="Name" aria-label="Name">
+            <select class="form-control bg-dark text-info border-info mr-2" name="ConditionSearch">
+                <option value="">Condition</option>
+                <option value="0">New</option>
+                <option value="1">Used</option>
+            </select>
+            <select class="form-control bg-dark text-info border-info mr-2" name="CategorySearch">
+                <option value="">Category</option>
+                <option value="0">Electronics</option>
+                <option value="1">Fashion</option>
+                <option value="2">Home</option>
+                <option value="3">Sports</option>
+                <option value="4">Books</option>
+                <option value="5">Other</option>
+            </select>
+            <button class="btn btn-outline-info" type="submit">Advanced Search</button>
+        </form>
+        <form asp-action="PriceSort" class="form-inline">
+            <div class="input-group">
+                <select class="form-control bg-dark text-info border-info" name="PriceSelection">
+                    <option value="">Price</option>
+                    <option value="0">Low to High</option>
+                    <option value="1">High to Low</option>
+                </select>
+                <button class="btn btn-outline-info ml-2" type="submit">Sort by Price</button>
+            </div>
+        </form>
+    </div>
+ </div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Starting Price</th>
+                <th>Highest Bid</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">
+                            <img src="@Url.Content(item.ImageUrl)" alt="Auction Image" style="max-width: 200px; max-height: 200px;" />
+                        </a>
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ReservedPrice)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CurrentPrice)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

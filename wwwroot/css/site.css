@@ -1,0 +1,212 @@
+/* General styles for the entire website */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a; /* Dark background color */
+    color: #add8e6; /* Light blue text color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Set a max-width for the content container and center it */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+/* Style links */
+a {
+    color: #add8e6;
+    text-decoration: none;
+}
+
+/* Style for the navigation bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    flex-wrap: wrap;
+    background-color: #333;
+}
+
+    .navbar a {
+        color: #add8e6;
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 10px;
+        transition: background-color 0.3s;
+    }
+
+        .navbar a:hover {
+            background-color: #87ceeb;
+        }
+
+    .navbar .active {
+        background-color: #87ceeb;
+    }
+
+/* Responsive navigation bar for mobile devices */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+    }
+}
+
+/* Style buttons */
+button {
+    background-color: #add8e6;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+    button:hover {
+        background-color: #87ceeb;
+    }
+
+/* Style for the home, about, and contact page */
+.home, .about, .contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+    .home .container,
+    .about .container,
+    .contact .container {
+        text-align: center;
+    }
+
+        .home .container h1,
+        .about .container h1,
+        .contact .container h1 {
+            font-size: 3rem;
+            margin-bottom: 0;
+        }
+
+        .home .container p,
+        .about .container p,
+        .contact .container p {
+            font-size: 1.5rem;
+        }
+
+/* Footer styles */
+.footer {
+    background-color: #1a1a1a;
+    color: #add8e6;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+}
+
+    .footer p {
+        margin: 0;
+    }
+
+    .footer a {
+        color: #add8e6;
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive styles for mobile devices */
+@media screen and (max-width: 768px) {
+    /* Apply styles for mobile devices */
+}
+
+
+/* New styles added */
+table {
+    color: #FFFFFF;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    table th {
+        color: #FFFFFF;
+        background-color: #1a1a1a;
+        text-align: left;
+        padding: 10px;
+    }
+
+    table td {
+        color: #FFFFFF;
+        background-color: #2f2f2f;
+        padding: 10px;
+    }
+
+    table tr:hover {
+        background-color: #87ceeb;
+    }
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.card-custom {
+    background-color: #2f2f2f;
+    border-color: #1a1a1a;
+}
+
+.text-info {
+    color: #add8e6;
+}
+
+.my-4 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.form-inline input[type=search] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 10px 5px;
+    width: 250px;
+}
+
+.form-inline select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin: 10px 5px;
+    min-width: 100px;
+}
+
+.form-inline button[type=submit] {
+    padding: 5px 10px;
+    background-color: #add8e6;
+    color: #1a1a1a;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+    .form-inline button[type=submit]:hover {
+        background-color: #87ceeb;
+    }
+
+.input-group select {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.input-group button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    margin-left: -1px;
+}

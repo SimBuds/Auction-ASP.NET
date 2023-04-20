@@ -1,0 +1,20 @@
+﻿@model web_project.Models.Bid
+
+<h1>Place Bid</h1>
+
+<form method="post" action="@Url.Action("PlaceBid", "Bids")">
+    <input type="hidden" name="auctionId" value="@ViewBag.AuctionId" />
+    <div class="form-group">
+        <label for="amount">Bid Amount:</label>
+        <input type="number" name="amount" id="amount" step="0.01" required />
+    </div>
+    <div class="form-group">
+        <label for="userId">User ID:</label>
+        <input type="text" name="userId" id="userId" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Place Bid</button>
+</form>
+
+<div>
+    <a asp-action="Index">Back to Auctions</a>
+</div>

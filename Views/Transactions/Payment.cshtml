@@ -1,0 +1,33 @@
+﻿@model web_project.Models.PaymentModel
+
+<h1>Receive Payment</h1>
+
+<div class="row card bg-dark text-info">
+    <div class="card-body align-content-center">
+        <form method="post">
+            <div class="form-group">
+                <label for="cardNumber" class="control-label">Card Number</label>
+                <input type="number" class="form-control" id="cardNumber" name="CardNumber" placeholder="Enter card number" required>
+            </div>
+            <div class="form-group">
+                <label for="expiryMonth" class="control-label">Expiry Month</label>
+                <input type="number" class="form-control" id="expiryMonth" name="ExpiryMonth" placeholder="MM" min="1" max="12" required>
+            </div>
+            <div class="form-group">
+                <label for="expiryYear" class="control-label">Expiry Year</label>
+                <input type="number" class="form-control" id="expiryYear" name="ExpiryYear" placeholder="YY" min="@DateTime.Now.Year" max="@DateTime.Now.AddYears(10).Year" required>
+            </div>
+            <div class="form-group">
+                <label for="securityCode" class="control-label">Security Code</label>
+                <input type="number" class="form-control" id="securityCode" name="SecurityCode" placeholder="Enter security code" maxlength="3" required>
+            </div>
+            <div class="form-group">
+                <label for="cardholderName" class="control-label">Cardholder Name</label>
+                <input type="text" class="form-control" id="cardholderName" name="CardholderName" placeholder="Enter cardholder name" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>    

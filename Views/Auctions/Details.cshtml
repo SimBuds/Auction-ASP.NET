@@ -1,0 +1,132 @@
+﻿@using System.Security.Claims
+@using web_project.Models
+@using web_project.Data
+@using Microsoft.AspNetCore.SignalR;
+@inject ApplicationDbContext _context
+@model web_project.Models.Auction
+
+@{
+    ViewData["Title"] = "Current Auction";
+    var highestBid = _context.Bids
+        .Where(b => b.AuctionId == Model.Id)
+        .OrderByDescending(b => b.Amount)
+        .FirstOrDefault();
+    ViewBag.HighestBid = highestBid?.Amount ?? Model.StartingPrice;
+
+    ViewBag.AuctionId = Model.Id;
+    ViewBag.AuctionUserId = Model.UserId;
+
+    if (User?.Identity.IsAuthenticated == true)
+    {
+        var nameIdentifierClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        ViewBag.UserId = nameIdentifierClaim != null ? nameIdentifierClaim.Value : null;
+    }
+    else
+    {
+        ViewBag.UserId = null;
+    }
+
+    ViewBag.IsBuyer = ViewBag.UserId != ViewBag.AuctionUserId; // Added this line to set ViewBag.IsBuyer
+    bool isBuyer = User.Identity.IsAuthenticated && ViewBag.IsBuyer ?? false;
+}
+
+<div>
+    <h1>@Html.DisplayFor(model => model.Name)</h1>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Product Name:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Description:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            Starting Price:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ReservedPrice)
+        </dd>
+        <dt class="col-sm-2">
+            Highest Bid:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CurrentPrice)
+        </dd>
+        <dt class="col-sm-2">
+            End Date:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dd class="col-sm-10">
+            <img src="@Url.Content(Model.ImageUrl)" alt="Auction Image" style="max-width: 200px; max-height: 200px;" />
+        </dd>
+    </dl>
+</div>
+
+@if (isBuyer)
+{
+    <div>
+        <h5>Place a Bid</h5>
+        <form asp-controller="Bids" asp-action="PlaceBid" method="post">
+            <input type="hidden" name="auctionId" value="@Model.Id" />
+            <input type="hidden" name="userId" value="@ViewBag.UserId" />
+            <label for="bidAmount">Bid Amount:</label>
+            <input type="number" name="amount" id="bidAmount" step="0.01" />
+            <button type="submit" class="btn-primary">Place Bid</button>
+        </form>
+    </div>
+}
+
+<!-- Display Current Reviews -->
+<div>
+    <h5>Item Reviews:</h5>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <p class="text-white">Reviewer</p>
+                </th>
+                <th class="text-center">
+                    <p class="text-white">Rating</p>
+                </th>
+                <th class="text-center">
+                    <p class="text-white">Comment</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Reviews != null)
+            {
+                foreach (var review in Model.Reviews)
+                {
+                    <tr>
+                        <td class="text-center">
+                            <p class="text-white">@review.ReviewerId</p>
+                        </td>
+                        <td class="text-center">
+                            <p class="text-white">@review.Rating</p>
+                        </td>
+                        <td class="text-center">
+                            <p class="text-white">@review.Comment</p>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (isBuyer)
+{
+    <p><a asp-controller="Reviews" asp-action="Create" asp-route-auctionId="@Model.Id" class="link-primary">Create Review</a></p>
+}
+
+<script src="~/js/signalr.js"></script>
+<script src="~/js/auctions.js"></script>
